@@ -1,19 +1,14 @@
 import random
+import deck
 
 userCards = []
 dealerCards = []
-deck = {}
-
-def intitalizeDeck():
-    global deck
-    for i in range(1, 14):
-        deck[i] = 4
 
 def pickCard():
     randomCard = random.randint(1,13)
-    while deck[randomCard] == 0:
+    while deck.getValue(randomCard) == 0:
         randomCard = random.randint(1,13)
-    deck[randomCard] -= 1
+    deck.decKey(randomCard)
     return randomCard
 
 def userHit():
@@ -49,7 +44,9 @@ def getSumUserCards():
     return getSumCards(userCards)
 
 def convertCardtoString(card):
-    if card == 11:
+    if card == 1:
+        return 'A'
+    elif card == 11:
         return 'J'
     elif card == 12:
         return 'Q'
@@ -86,7 +83,7 @@ def printDealerCards(hidden):
         dealerCardMessage += '\n'
         dealerCardMessage += "Dealer's Total: "
         sumDealerCards = getSumCards(dealerCards)
-        dealerCardMessage += str(sumDealerCards[0])
+        dealerCardMessage += str(max(sumDealerCards))
     print(dealerCardMessage)
 
 def reset():
@@ -94,4 +91,3 @@ def reset():
     global dealerCards
     userCards = []
     dealerCards = []
-    intitalizeDeck()

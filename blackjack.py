@@ -1,4 +1,5 @@
 import cards
+import deck
 
 stopGame = False
 
@@ -56,6 +57,7 @@ def playAgain():
     action = str(input())
     if action == "y":
         cards.reset()
+        deck.intializeDeck()
         stopGame = False
         print('\n')
         main()
@@ -84,11 +86,10 @@ def dealerPlay():
                 over17 = True
         else:
             cards.dealerHit()
-    print(cards.getSumDealerCards())
 
 def main():
     global stopGame
-    cards.intitalizeDeck()
+    deck.intializeDeck()
     start()
     while not stopGame:
         cards.printDealerCards(True)
